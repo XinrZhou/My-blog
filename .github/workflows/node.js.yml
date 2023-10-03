@@ -9,7 +9,7 @@ on:
   pull_request:
     branches: [ "master" ]
 env: 
-  path: /root/workspace/myblog/nginx/html
+  path: /workspace2023/myblog/nginx/html
   
 jobs:
   build:
