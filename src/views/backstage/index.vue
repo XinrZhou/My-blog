@@ -5,7 +5,7 @@
             <el-menu default-active="1" class="el-menu-vertical-demo" @select="handleSelect">
                 <el-menu-item index="1">
                     <el-icon>
-                        <document />
+                        <star />
                     </el-icon>
                     <span>个人中心</span>
                 </el-menu-item>
@@ -19,6 +19,12 @@
                     <el-menu-item index="2-1">我的博客</el-menu-item>
                     <el-menu-item index="2-2">新建博客</el-menu-item>
                 </el-sub-menu>
+                <el-menu-item index="3">
+                    <el-icon>
+                        <document />
+                    </el-icon>
+                    <span>页面管理</span>
+                </el-menu-item>
             </el-menu>
         </el-col>
         <el-col :span="18" :offset="1">
@@ -28,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-    import { Document, Location, Setting } from '@element-plus/icons-vue'
+    import { Document, Star, Setting } from '@element-plus/icons-vue'
     import router from '@/router'
 
     let handleSelect = (index) => {

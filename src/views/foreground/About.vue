@@ -1,5 +1,8 @@
 <template>
-    <div class="background-div">
+    <div 
+      class="background-div"
+      :style="{ backgroundImage: `url('https://images.unsplash.com/photo-1605633561363-87dc6c83fd39?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}"
+    >
     </div>
     <el-row justify="space-evenly">
         <el-col :xs="22" :sm="20" :md="20" :lg="3">
@@ -88,9 +91,8 @@
         color: white;
         border-radius: 10px;
         background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-size: cover;
         -moz-background-size: 100% 100%;
-        background-image: url("https://images.unsplash.com/photo-1630150187735-03d76dd8faad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2475&q=80");
     }
 
     .el-row {

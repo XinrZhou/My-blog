@@ -1,7 +1,10 @@
 <template>
     <!-- <Weather /> -->
-    <div class="background-div">
-        <h1 style="font-size:60px;">Xinrui's Blog</h1>
+    <div 
+      class="background-div" 
+      :style="{ backgroundImage: `url('https://images.unsplash.com/photo-1513297887119-d46091b24bfa?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}"
+    >
+      <h1 style="font-size:60px;">Xinrui's Blog</h1>
     </div>
     <el-row justify="space-evenly">
         <el-col :xs="22" :sm="20" :md="18" :lg="12">
@@ -92,9 +95,8 @@
         color: white;
         margin-bottom: 40px;
         background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-size: cover;
         -moz-background-size: 100% 100%;
-        background-image: url("https://images.unsplash.com/photo-1585662659173-fa3eba687ea1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80");
     }
 
     .about {
@@ -102,9 +104,9 @@
     }
 
     .about-avatar {
-        width: 100%;
-        height: 80%;
-        border-radius: 8px;
+        width: 60%;
+        height: 60%;
+        border-radius: 6px;
         object-fit: cover;
     }
 
