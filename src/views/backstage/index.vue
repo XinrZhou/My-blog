@@ -43,10 +43,13 @@
                 router.push('/backstage/index')
                 break
             case "2-1":
-                router.push('/backstage/index/manage')
+                router.push('/backstage/index/blogmanagement')
+                break
+            case "2-2":
+                router.push('/backstage/index/blogmanagement/edit')
                 break
             default:
-                router.push('/backstage/index/manage/edit')
+                router.push('/backstage/index/pagemanagement')
                 break
         }
     }

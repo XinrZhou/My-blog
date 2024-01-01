@@ -17,8 +17,8 @@ export default [
                 component: () => import('@/views/backstage/UserCenter.vue')
             },
             {
-                name: 'manage',
-                path: 'manage',
+                name: 'blogmanagement',
+                path: 'blogmanagement',
                 component: () => import('@/views/backstage/BlogManagement.vue'),
                 children:[
                     {
@@ -32,7 +32,12 @@ export default [
                         component: () => import('@/views/backstage/BlogManagement/BlogEdit.vue')
                     }
                 ]
-            }
+            },
+            {
+                name: 'pagemanagement',
+                path: 'pagemanagement',
+                component: () => import('@/views/backstage/PageManagement.vue')
+            },
         ],
         meta: {
             role: 'ADMIN'

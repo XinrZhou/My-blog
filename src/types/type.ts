@@ -29,3 +29,10 @@ export interface Message {
   updateTime?: string
 }
 
+export interface PageInfo {
+  id?: string
+  name?: string
+  backgroundUrl?: string
+  description?: string
+}
+

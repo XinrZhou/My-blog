@@ -1,4 +1,5 @@
 <template>
+    <PageHeader :pageName="PAGE_TYPE.BLOGS" />
     <el-row  justify="center">
         <el-col :xs="22" :sm="20" :md="20" :lg="12" >
             <div class="articles">
@@ -13,8 +14,10 @@
 <script lang="ts" setup>
     import router from '@/router'
     import { ref, reactive, computed } from 'vue'
+    import PageHeader from '@/views/foreground/components/PageHeader.vue'
     import ArticleCardList from '@/views/foreground/components/ArticleCardList.vue'
     import { useArticleStore } from '@/store/useArticleStore'
+    import { PAGE_TYPE } from '@/types/Const'
 
     let page = ref(1)
     let pageSize = ref(6)

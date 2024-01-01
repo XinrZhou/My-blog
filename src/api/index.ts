@@ -1,5 +1,5 @@
 import { request } from '@/api/http'
-import { User, Article, Message } from '@/types/type'
+import { User, Article, Message, PageInfo } from '@/types/type'
 import axios from 'axios'
 
 // 登录
@@ -129,6 +129,31 @@ export function reqGetMessages() {
 export function reqPostMessage(data: Message) {
   return request({
     url: '/front/message',
+    data,
+    method: 'post'
+  })
+}
+
+// 获取页面信息 -- 根据页面名称
+export function reqGetPageInfoByName(pageName: string) {
+  return request({
+    url: `/pageInfo/info/${pageName}`,
+    method: 'get'
+  })
+}
+
+// 获取所有页面信息
+export function reqGetPageInfo(pageName: string) {
+  return request({
+    url: '/pageInfo/info',
+    method: 'get'
+  })
+}
+
+// 修改页面信息
+export function reqPostPageInfo(data: PageInfo) {
+  return request({
+    url: '/pageInfo/info',
     data,
     method: 'post'
   })

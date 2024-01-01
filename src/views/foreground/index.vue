@@ -1,11 +1,5 @@
 <template>
-    <!-- <Weather /> -->
-    <div 
-      class="background-div" 
-      :style="{ backgroundImage: `url('https://images.unsplash.com/photo-1513297887119-d46091b24bfa?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`}"
-    >
-      <h1 style="font-size:60px;">Xinrui's Blog</h1>
-    </div>
+    <PageHeader :pageName="PAGE_TYPE.INDEX" />
     <el-row justify="space-evenly">
         <el-col :xs="22" :sm="20" :md="18" :lg="12">
             <div class="articles">
@@ -42,22 +36,28 @@
 
 <script lang="ts" setup>
     import ArticleCardList from '@/views/foreground/components/ArticleCardList.vue'
-    import Weather from '@/components/Weather.vue'
+    // import Weather from '@/components/Weather.vue'
+    import PageHeader from '@/views/foreground/components/PageHeader.vue'
     import { ref, reactive, computed } from 'vue'
     import { StarFilled, Message, More } from '@element-plus/icons-vue'
     import { useUserInfoStore } from '@/store/useUserInfoStore'
     import { useArticleStore } from '@/store/useArticleStore'
+    import { usePageInfoStore } from '@/store/usePageInfoStore'
     import { User } from '@/types/type'
+    import { PAGE_TYPE } from '@/types/Const'
     import router from '@/router'
 
     let userStore = useUserInfoStore()
     let articleStore = useArticleStore()
+    let pageInfoStore = usePageInfoStore()
 
     userStore.getUserInfo()
     articleStore.getLabelsAndCount()
+    pageInfoStore.getPageInfoByName(PAGE_TYPE.INDEX)
 
     const user = computed(() => userStore.user)
     const labels = computed(() => articleStore.labelList)
+    const pageInfo = computed(() => pageInfoStore.pageInfo)
 
     const tagType = reactive(['success', 'info', 'warning', 'danger'])
 
