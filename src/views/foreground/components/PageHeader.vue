@@ -1,18 +1,25 @@
 <template>
     <div 
       class="background-div" 
-      :style="{ backgroundImage: `url(data:image/jpeg;base64,${pageInfo.backgroundUrl})`}"
+      :style="{ backgroundImage: `url(data:image/jpeg;base64,${pageInfoR.backgroundUrl})`}"
     >
-      <h1 style="font-size:60px;">{{ pageInfo.description }}</h1>
+      <h1 style="font-size:60px;">{{ pageInfoR?.description }}</h1>
     </div>
 </template>
 
 <script lang="ts" setup>
     import { usePageInfoStore } from '@/store/usePageInfoStore'
     import { PAGE_TYPE } from '@/types/Const'
-    import { defineProps, computed } from 'vue'
+    import { PageInfo } from '@/types/type'
+    import { defineProps, computed, ref, watch } from 'vue'
 
     let pageInfoStore = usePageInfoStore()
+
+    let pageInfoR = ref < PageInfo >({})
+
+    watch(() => pageInfoStore.pageInfo, () => {
+        pageInfoR.value = pageInfoStore.pageInfo
+    })
 
     const pageInfo = computed(() => pageInfoStore.pageInfo)
     const props = defineProps(['pageName'])
