@@ -1,7 +1,7 @@
 <template>
     <PageHeader :pageName="PAGE_TYPE.INDEX" />
     <el-row justify="space-evenly">
-        <el-col :xs="22" :sm="20" :md="18" :lg="12">
+        <el-col :xs="22" :sm="20" :md="18" :lg="10">
             <div class="articles">
                 <h2 class="item-title">Recent Articles</h2>
                 <ArticleCardList />
@@ -11,7 +11,7 @@
             </div>
 
         </el-col>
-        <el-col :xs="22" :sm="20" :md="20" :lg="3">
+        <el-col :xs="22" :sm="20" :md="20" :lg="4">
             <div class="about hidden-xs-only">
                 <h5 class="item-title">ABOUT</h5>
                 <img :src="'data:image/jpeg;base64,'+user.avatarUrl" class="about-avatar" />
@@ -104,10 +104,12 @@
     }
 
     .about-avatar {
-        width: 60%;
-        height: 60%;
-        border-radius: 6px;
+        width: 45%;
+        height: 45%;
+        border-radius: 50%;
         object-fit: cover;
+        display: block;
+        margin: 0 auto;
     }
 
     .about-nickname {
@@ -115,8 +117,9 @@
     }
 
     .about-sign {
-        margin-left: 10px;
+        text-align: center;
         font: large bolder;
+        margin-top: 10px;
     }
 
     .item-title {

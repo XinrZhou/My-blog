@@ -11,7 +11,7 @@
     </el-row>
     <el-row>
         <el-col :span="24">
-            <el-scrollbar height="600px">
+            <el-scrollbar height="700px">
                 <el-timeline>
                     <el-timeline-item :timestamp="item.insertTime" placement="top" v-for="item in messageList"
                         :id="item.id">

@@ -1,7 +1,7 @@
 <template>
     <PageHeader :pageName="PAGE_TYPE.BLOGS" />
     <el-row  justify="center">
-        <el-col :xs="22" :sm="20" :md="20" :lg="12" >
+        <el-col :xs="22" :sm="20" :md="20" :lg="13" >
             <div class="articles">
                 <ArticleCardList />
             </div>
