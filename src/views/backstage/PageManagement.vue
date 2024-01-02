@@ -1,5 +1,14 @@
 <template>
     <h2>页面管理</h2>
+    <el-select v-model="selectedPage" placeholder="请选择页面" @change="handleSelectedPageChange">
+        <el-option
+          v-for="page in pageInfoList"
+          :key="page.id"
+          :label="page.name"
+          :value="page.name"
+        />
+    </el-select>
+
     <el-button type="primary" text @click="dialogVisible = true">
         <el-icon><Plus /></el-icon>
         添加页面
@@ -28,24 +37,24 @@
         </span>
         </template>
     </el-dialog>
-    <div class="info-card" v-for="pageInfo in pageInfoList" :key="pageInfo.id">
-        <el-form :model="pageInfo" label-width="60px">
-            <el-form-item label="Name">
-                <el-input v-model="pageInfo.name" clearable />
-            </el-form-item>
-            <el-form-item label="Description">
-                <el-input v-model="pageInfo.description" clearable />
-            </el-form-item>
-            <el-form-item label="BackgroundUrl">
-                <el-input v-model="pageInfo.backgroundUrl" clearable />
-            </el-form-item>
-        </el-form>
-        <el-button color="#5d7430" plain @click="savePageInfo">Save</el-button>
-        <el-divider />
-    </div>
+    <el-divider />
+
+    <el-form :model="pageInfo" label-width="60px" label-position="top">
+        <el-form-item label="Name">
+            <el-input v-model="pageInfo.name" clearable />
+        </el-form-item>
+        <el-form-item label="Description">
+            <el-input v-model="pageInfo.description" clearable />
+        </el-form-item>
+        <el-form-item label="BackgroundUrl">
+            <ImageUpload :imageUrl="pageInfo.backgroundUrl" @Upload="getUploadData" />
+        </el-form-item>
+    </el-form>
+    <el-button color="#5d7430" plain @click="savePageInfo">Save</el-button>
 </template>
 
 <script lang="ts" setup>
+    import ImageUpload from '@/components/ImageUpload.vue'
     import { Plus } from '@element-plus/icons-vue'
     import { usePageInfoStore } from '@/store/usePageInfoStore'
     import { ref, computed, watch, toRaw } from 'vue'
@@ -55,18 +64,27 @@
     let store = usePageInfoStore()
     store.getPageInfoList()
 
-    let page = ref < PageInfo >({})
+    const pageInfo = computed(() => store.pageInfo)
     let pageInfoList = ref < PageInfo >({})
     let dialogVisible = ref <Boolean>(false)
+    let selectedPage = ref < String >('')
 
     watch(() => store.pageInfoList, () => {
         pageInfoList.value = store.pageInfoList
     })
 
+    let handleSelectedPageChange = () => {
+        store.getPageInfoByName(selectedPage.value)
+    }
+
+    // get upload data 
+    let getUploadData = (uploadImgUrl: string) => {
+      toRaw(pageInfo.value).backgroundUrl = uploadImgUrl
+    }
+
     let savePageInfo = () => {
         store.postPageInfo(toRaw(pageInfo.value))
     }
-
 </script>
 
 

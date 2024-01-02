@@ -38,7 +38,7 @@
     import { ref, computed, watch, toRaw } from 'vue'
     import { User } from '@/types/type'
     import { ElMessage } from "element-plus"
-    import ImageUpload from '@/views/backstage/components/ImageUpload.vue'
+    import ImageUpload from '@/components/ImageUpload.vue'
 
     let store = useUserInfoStore()
     store.getAdminInfo()

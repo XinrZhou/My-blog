@@ -1,7 +1,7 @@
 <template>
     <div 
       class="background-div" 
-      :style="{ backgroundImage: `url(${pageInfo.backgroundUrl})`}"
+      :style="{ backgroundImage: `url(data:image/jpeg;base64,${pageInfo.backgroundUrl})`}"
     >
       <h1 style="font-size:60px;">{{ pageInfo.description }}</h1>
     </div>
