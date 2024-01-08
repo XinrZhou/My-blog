@@ -37,7 +37,7 @@
 
     const handleEdit = (index: number, row: Article) => {
         router.push({
-            path: '/backstage/index/manage/edit',
+            path: '/backstage/index/blogmanagement/edit',
             query: {
                 id: row.id
             }
