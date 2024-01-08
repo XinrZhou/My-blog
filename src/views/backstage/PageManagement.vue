@@ -18,30 +18,31 @@
         width="40%"
         center
         align-center
+        @close="pageInfoNew = {}"
     >
-        <el-form :model="pageInfo" label-width="60px" class="form-dialog">
+        <el-form :model="pageInfoNew" label-width="120px" label-position="left">
             <el-form-item label="Name">
-                <el-input v-model="page.name" clearable />
+                <el-input v-model="pageInfoNew.name" clearable />
             </el-form-item>
             <el-form-item label="Description">
-                <el-input v-model="page.description" clearable />
+                <el-input v-model="pageInfoNew.description" clearable />
             </el-form-item>
             <el-form-item label="BackgroundUrl">
-                <el-input v-model="page.backgroundUrl" clearable />
+                <ImageUpload :imageUrl="pageInfoNew.backgroundUrl" @Upload="getUploadData" />
             </el-form-item>
         </el-form>
         <template #footer>
         <span class="dialog-footer">
             <el-button @click="dialogVisible = false">取消</el-button>
-            <el-button type="primary" @click="createPage">添加</el-button>
+            <el-button type="primary" @click="savePageInfo(ACTION_TYPE.ADD)">添加</el-button>
         </span>
         </template>
     </el-dialog>
     <el-divider />
 
-    <el-form :model="pageInfo" label-width="60px" label-position="top">
+    <el-form :model="pageInfo" label-width="60px" label-position="top" v-if="selectedPage">
         <el-form-item label="Name">
-            <el-input v-model="pageInfo.name" clearable />
+            <el-input v-model="pageInfo.name" disabled />
         </el-form-item>
         <el-form-item label="Description">
             <el-input v-model="pageInfo.description" clearable />
@@ -49,8 +50,8 @@
         <el-form-item label="BackgroundUrl">
             <ImageUpload :imageUrl="pageInfo.backgroundUrl" @Upload="getUploadData" />
         </el-form-item>
+        <el-button color="#5d7430" plain @click="savePageInfo(ACTION_TYPE.UPDATE)">Save</el-button>
     </el-form>
-    <el-button color="#5d7430" plain @click="savePageInfo">Save</el-button>
 </template>
 
 <script lang="ts" setup>
@@ -65,9 +66,15 @@
     store.getPageInfoList()
 
     const pageInfo = computed(() => store.pageInfo)
+    const pageInfoNew = ref < PageInfo >({})
     let pageInfoList = ref < PageInfo >({})
     let dialogVisible = ref <Boolean>(false)
     let selectedPage = ref < String >('')
+
+    const ACTION_TYPE = {
+        ADD: 'add',
+        UPDATE: 'update'
+    }
 
     watch(() => store.pageInfoList, () => {
         pageInfoList.value = store.pageInfoList
@@ -78,11 +85,18 @@
     }
 
     // get upload data 
-    let getUploadData = (uploadImgUrl: string) => {
+    let getUploadData = (uploadImgUrl:  string) => {
       toRaw(pageInfo.value).backgroundUrl = uploadImgUrl
     }
 
-    let savePageInfo = () => {
+    let savePageInfo = (actionType: string) => {
+        actionType === ACTION_TYPE.ADD ? 
+            store.postPageInfo(toRaw(pageInfoNew.value)) : 
+            store.postPageInfo(toRaw(pageInfo.value))
+    }
+
+    let deletePageInfo = () => {
+        store.deletePageInfo(toRaw(pageInfo.value))
         store.postPageInfo(toRaw(pageInfo.value))
     }
 </script>
@@ -93,13 +107,6 @@
         margin: 20px 0;
         margin-right: 30px;
         border-radius: 10px;
-    }
-
-    .form-dialog {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
     }
 
     .info-card {
